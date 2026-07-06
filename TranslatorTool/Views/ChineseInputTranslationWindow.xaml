@@ -1,0 +1,74 @@
+<Window x:Class="TranslatorTool.Views.ChineseInputTranslationWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        Title="输入中文翻译"
+        Width="620"
+        Height="560"
+        MinWidth="520"
+        MinHeight="460"
+        WindowStartupLocation="CenterScreen">
+    <Grid Margin="16">
+        <Grid.RowDefinitions>
+            <RowDefinition Height="Auto" />
+            <RowDefinition Height="*" />
+            <RowDefinition Height="Auto" />
+            <RowDefinition Height="*" />
+            <RowDefinition Height="Auto" />
+            <RowDefinition Height="Auto" />
+        </Grid.RowDefinitions>
+
+        <TextBlock Grid.Row="0" Text="输入中文" FontWeight="SemiBold" />
+        <TextBox x:Name="SourceTextBox"
+                 Grid.Row="1"
+                 Margin="0,6,0,12"
+                 Text="{Binding SourceText, UpdateSourceTrigger=PropertyChanged}"
+                 TextWrapping="Wrap"
+                 AcceptsReturn="True"
+                 VerticalScrollBarVisibility="Auto"
+                 PreviewMouseRightButtonDown="SourceTextBox_PreviewMouseRightButtonDown" />
+
+        <Grid Grid.Row="2" Margin="0,0,0,12">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="Auto" />
+                <ColumnDefinition Width="180" />
+                <ColumnDefinition Width="*" />
+                <ColumnDefinition Width="Auto" />
+            </Grid.ColumnDefinitions>
+            <TextBlock Grid.Column="0" Text="目标语言" VerticalAlignment="Center" Margin="0,0,8,0" />
+            <ComboBox Grid.Column="1"
+                      ItemsSource="{Binding TargetLanguages}"
+                      SelectedItem="{Binding SelectedLanguage}"
+                      DisplayMemberPath="DisplayName" />
+            <TextBlock Grid.Column="2"
+                       Margin="12,0,0,0"
+                       Text="{Binding StatusMessage}"
+                       Foreground="#FF444444"
+                       TextWrapping="Wrap"
+                       VerticalAlignment="Center" />
+            <Button Grid.Column="3"
+                    MinWidth="76"
+                    Padding="12,6"
+                    Content="翻译"
+                    Command="{Binding TranslateCommand}" />
+        </Grid>
+
+        <TextBox Grid.Row="3"
+                 Text="{Binding TranslatedText, Mode=OneWay}"
+                 TextWrapping="Wrap"
+                 AcceptsReturn="True"
+                 IsReadOnly="True"
+                 VerticalScrollBarVisibility="Auto" />
+
+        <TextBlock Grid.Row="4"
+                   Margin="0,10,0,0"
+                   Text="{Binding Notes}"
+                   Foreground="#FF555555"
+                   TextWrapping="Wrap" />
+
+        <StackPanel Grid.Row="5" Margin="0,14,0,0" Orientation="Horizontal" HorizontalAlignment="Right">
+            <Button Padding="12,6" Margin="0,0,8,0" Content="复制译文" Command="{Binding CopyCommand}" />
+            <Button Padding="12,6" Margin="0,0,8,0" Content="清空" Command="{Binding ClearCommand}" />
+            <Button Padding="12,6" Content="关闭" Click="CloseButton_Click" />
+        </StackPanel>
+    </Grid>
+</Window>

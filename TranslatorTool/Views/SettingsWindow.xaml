@@ -1,0 +1,66 @@
+<Window x:Class="TranslatorTool.Views.SettingsWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        Title="设置"
+        Height="500"
+        Width="560"
+        WindowStartupLocation="CenterOwner">
+    <Grid Margin="18">
+        <Grid.RowDefinitions>
+            <RowDefinition Height="Auto" />
+            <RowDefinition Height="Auto" />
+            <RowDefinition Height="Auto" />
+            <RowDefinition Height="Auto" />
+            <RowDefinition Height="Auto" />
+            <RowDefinition Height="Auto" />
+            <RowDefinition Height="Auto" />
+            <RowDefinition Height="Auto" />
+            <RowDefinition Height="*" />
+            <RowDefinition Height="Auto" />
+        </Grid.RowDefinitions>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="140" />
+            <ColumnDefinition Width="*" />
+        </Grid.ColumnDefinitions>
+
+        <TextBlock Grid.Row="0" Grid.Column="0" VerticalAlignment="Center" Text="AI API Key" />
+        <PasswordBox Grid.Row="0" Grid.Column="1" x:Name="ApiKeyBox" PasswordChanged="ApiKeyBox_PasswordChanged" />
+
+        <TextBlock Grid.Row="1" Grid.Column="0" Margin="0,12,0,0" VerticalAlignment="Center" Text="AI 接口地址" />
+        <TextBox Grid.Row="1" Grid.Column="1" Margin="0,12,0,0" Text="{Binding Settings.AiBaseUrl, UpdateSourceTrigger=PropertyChanged}" />
+
+        <TextBlock Grid.Row="2" Grid.Column="0" Margin="0,12,0,0" VerticalAlignment="Center" Text="翻译模型" />
+        <TextBox Grid.Row="2" Grid.Column="1" Margin="0,12,0,0" Text="{Binding Settings.AiTranslationModel, UpdateSourceTrigger=PropertyChanged}" />
+
+        <TextBlock Grid.Row="3" Grid.Column="0" Margin="0,12,0,0" VerticalAlignment="Center" Text="视觉 OCR 模型" />
+        <TextBox Grid.Row="3" Grid.Column="1" Margin="0,12,0,0" Text="{Binding Settings.AiVisionOcrModel, UpdateSourceTrigger=PropertyChanged}" />
+
+        <TextBlock Grid.Row="4" Grid.Column="0" Margin="0,12,0,0" VerticalAlignment="Center" Text="Argos Python" />
+        <TextBox Grid.Row="4" Grid.Column="1" Margin="0,12,0,0" Text="{Binding Settings.ArgosPythonPath, UpdateSourceTrigger=PropertyChanged}" />
+
+        <TextBlock Grid.Row="5" Grid.Column="0" Margin="0,12,0,0" VerticalAlignment="Center" Text="默认目标语言" />
+        <TextBox Grid.Row="5" Grid.Column="1" Margin="0,12,0,0" Text="{Binding Settings.TargetLanguage, UpdateSourceTrigger=PropertyChanged}" />
+
+        <CheckBox Grid.Row="6" Grid.Column="1" Margin="0,12,0,0" Content="启用离线翻译" IsChecked="{Binding Settings.EnableOfflineTranslation}" />
+        <CheckBox Grid.Row="7" Grid.Column="1" Margin="0,12,0,0" Content="启用 AI 翻译" IsChecked="{Binding Settings.EnableAiTranslation}" />
+
+        <StackPanel Grid.Row="8" Grid.ColumnSpan="2" Margin="0,18,0,0">
+            <TextBlock Text="OpenAI 默认：https://api.openai.com/v1 / gpt-4.1-mini / gpt-4.1-mini"
+                       Foreground="#FF666666"
+                       TextWrapping="Wrap" />
+            <TextBlock Margin="0,6,0,0"
+                       Text="通义千问兼容接口：https://dashscope.aliyuncs.com/compatible-mode/v1。翻译优先可用 qwen-turbo，质量优先可用 qwen-plus；视觉 OCR 建议 qwen-vl-ocr-latest。"
+                       Foreground="#FF666666"
+                       TextWrapping="Wrap" />
+            <TextBlock Margin="0,6,0,0"
+                       Text="Argos Python 默认填 python；如使用虚拟环境，可填完整 python.exe 路径。"
+                       Foreground="#FF666666"
+                       TextWrapping="Wrap" />
+        </StackPanel>
+
+        <StackPanel Grid.Row="9" Grid.ColumnSpan="2" Orientation="Horizontal" HorizontalAlignment="Right">
+            <Button Padding="14,6" Margin="0,0,8,0" Content="保存" Command="{Binding SaveCommand}" />
+            <Button Padding="14,6" Content="关闭" Click="CloseButton_Click" />
+        </StackPanel>
+    </Grid>
+</Window>

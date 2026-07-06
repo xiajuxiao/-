@@ -1,0 +1,15 @@
+﻿bin/
+obj/
+artifacts/
+.vs/
+.vscode/
+*.user
+*.suo
+*.db
+*.db-shm
+*.db-wal
+*.log
+*.tmp
+*.zip
+*.rar
+*.7z
